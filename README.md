@@ -96,17 +96,17 @@ The four plots that you will need to construct are shown below.
 ### Plot 1
 
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+![plot of chunk plot1](figure/plot1.png) 
 
 
 ### Plot 2
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk plot2](figure/plot2.png) 
 
 
 ### Plot 3
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk plot3](figure/plot3.png) 
 
 
 ### Plot 4
@@ -211,6 +211,7 @@ png("plot1.png")
 barplot(SumEmissionsYear$Emissions/10^5, main="Total Emissions for Year", names.arg=SumEmissionsYear$year, xlab="Year",ylab="Emissions (10^5)",cex.names=0.8)
 dev.off()
 ```
+![plot of chunk plot1]() 
 
 **The total emissions have decreased every year from 1999 to 2008**
 
