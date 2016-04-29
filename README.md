@@ -96,12 +96,12 @@ The four plots that you will need to construct are shown below.
 ### Plot 1
 
 
-![plot of chunk plot1](figure/plot1.png) 
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot1.png) 
 
 
 ### Plot 2
 
-![plot of chunk plot2](figure/plot2.png) 
+![plot of chunk plot2](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot1.png) 
 
 
 ### Plot 3
@@ -211,7 +211,7 @@ png("plot1.png")
 barplot(SumEmissionsYear$Emissions/10^5, main="Total Emissions for Year", names.arg=SumEmissionsYear$year, xlab="Year",ylab="Emissions (10^5)",cex.names=0.8)
 dev.off()
 ```
-![plot of chunk plot1]() 
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot1.png) 
 
 **The total emissions have decreased every year from 1999 to 2008**
 
@@ -244,7 +244,7 @@ png("plot2.png")
 barplot(SumEmissionsYear24510$Emissions/10^2, main="Total Emissions for Year in Baltimore", names.arg=SumEmissionsYear24510$year, xlab="Year",ylab="Emissions in Baltimore (10^2)",cex.names=0.8)
 dev.off()
 ```
-
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot2.png) 
 
 **Only the type POINT have increased a little the emissions from 1999 to 2008**
 
@@ -277,7 +277,7 @@ png("plot3.png")
 ggplot(SumEmissionsYear24510, aes(year, Emissions, group = type,colour = type))+geom_line(size=1)+labs(title="Emissions Baltimore from 1999 to 2008")
 dev.off()
 ```
-
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot3.png) 
 **The `non-road`, `nonpoint`, `on-road` source types have all seen decreased emissions overall from 1999-2008 in Baltimore City.**
 **the `point` source increase until 2005 and it decreases again by 2008**
 
@@ -305,6 +305,8 @@ png("Plot4.png")
 ggplot(NEIcoal, aes(x=year, y=Emissions/10^5),xlab=year) + geom_bar(stat='identity', width=0.5)+labs(title="Emissions Coal from 1999-2008")+scale_x_continuous(breaks=c(1999,2002,2005,2008))
 dev.off()
 ```
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/Plot4.png) 
+
 ** Emission form Coal from 1999-2008 have decreased between 1999 and 2002, have increased a little between 2002-2005 and have decreased between 2005 and 2008**
 
 ### Question 5
@@ -335,6 +337,9 @@ png("plot5.png")
 ggplot(EmissionsYear24510vehicles, aes(x=year, y=Emissions),xlab=year) + geom_bar(stat='identity', width=0.5)+labs(title="Emissions Vehicles from 1999-2008")+scale_x_continuous(breaks=c(1999,2002,2005,2008))+xlab("Year")+ylab("Emission Levels")
 dev.off()
 ```
+
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot5.png) 
+
 **The vehicles emissions have decreased from 346.82 in 1999 to 88.27 in 2008**
 
 ###Question 6
@@ -369,6 +374,9 @@ png("plot6.png")
 ggplot(data=SumEmissionsYear, aes(x=year, y=Emissions, group=fips, shape=fips, colour=fips)) + geom_line() + geom_point()+ggtitle(expression(atop("Motor-Vehicle Emission Comparison",atop(italic("Baltimore vs Los Angeles, 1999-2008")))))+scale_shape_discrete(name  ="City",breaks=c("06037", "24510"),labels=c("Los Angeles", "Baltimore"))          
 dev.off()
 ```
+
+![plot of chunk plot1](https://github.com/MontseFigueiro/exdata-project2/blob/master/plot6.png) 
+
 **The emissions for motor vehicles in Los Angeles have increased between 1999 and 2008 and are highest than the values from Baltimore**
 
 
