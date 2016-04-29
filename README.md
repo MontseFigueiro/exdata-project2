@@ -171,3 +171,91 @@ dev.off()
 ### Question 4
 
 Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+
+```r
+NEI<- readRDS("summarySCC_PM25.rds")
+SCC<- readRDS("Source_Classification_Code.rds")
+```
+Look inside the SCC file and find "coal"
+```r
+SCCcoal <- SCC[grepl("Coal" , SCC$Short.Name), ]
+```
+Select inside NEI the rows equal to the file SCC
+```r
+NEIcoal <- NEI[NEI$SCC %in% SCCcoal$SCC, ]
+dim(SCCcoal)
+```
+Save the Plot inside Plot4.png file
+```r
+png("Plot4.png")
+ggplot(NEIcoal, aes(x=year, y=Emissions/10^5),xlab=year) + geom_bar(stat='identity', width=0.5)+labs(title="Emissions Coal from 1999-2008")+scale_x_continuous(breaks=c(1999,2002,2005,2008))
+dev.off()
+```
+** Emission form Coal from 1999-2008 have decreased between 1999 and 2002, have increased a little between 2002-2005 and have decreased between 2005 and 2008**
+
+### Question 5
+
+How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
+
+We have 2 tables with the data, NEI and SCC:
+```r
+NEI<- readRDS("summarySCC_PM25.rds")
+SCC<- readRDS("Source_Classification_Code.rds")
+```
+Only need the Data from Baltimore, fips = "24510"
+```r
+EmissionsYear24510 <- NEI[NEI$fips=="24510",]
+
+SCCvehicles <- SCC[grepl("Vehicles" , SCC$EI.Sector), ]
+
+EmissionsYear24510vehicles <- EmissionsYear24510[EmissionsYear24510$SCC %in% SCCvehicles$SCC, ]
+````
+We can see the Sum of Emission for every year in Baltimore:
+```r
+SumEmissionsYear <- aggregate(Emissions ~year+fips, EmissionsYear24510vehicles,sum)
+``
+
+Plotting and saving .npg
+```r
+png("plot5.png")
+ggplot(EmissionsYear24510vehicles, aes(x=year, y=Emissions),xlab=year) + geom_bar(stat='identity', width=0.5)+labs(title="Emissions Vehicles from 1999-2008")+scale_x_continuous(breaks=c(1999,2002,2005,2008))+xlab("Year")+ylab("Emission Levels")
+dev.off()
+```
+**The vehicles emissions have decreased from 346.82 in 1999 to 88.27 in 2008**
+
+###Question 6
+
+Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+
+We have 2 tables with the data NEI and SCC
+
+```r
+NEI<- readRDS("summarySCC_PM25.rds")
+SCC<- readRDS("Source_Classification_Code.rds")
+```
+Only need the Data from Baltimore, fips = "24510" and Los Angeles, fips="06037"
+
+```r
+EmissionsYear24510_06037 <- NEI[NEI$fips %in% c("24510","06037"),]
+unique(EmissionsYear24510_06037$fips)
+dim(EmissionsYear24510_06037)
+
+SCCvehicles <- SCC[grepl("Vehicles" , SCC$EI.Sector), ]
+
+EmissionsYearvehicles <- EmissionsYear24510_06037[EmissionsYear24510_06037$SCC %in% SCCvehicles$SCC, ]
+head(EmissionsYearvehicles)
+```
+We made the sum for every code fips(city), and for every year.
+```r
+SumEmissionsYear <- aggregate(Emissions ~year+fips, EmissionsYearvehicles,sum)
+```
+Plotting difference between the two cities
+```r
+png("plot6.png")
+ggplot(data=SumEmissionsYear, aes(x=year, y=Emissions, group=fips, shape=fips, colour=fips)) + geom_line() + geom_point()+ggtitle(expression(atop("Motor-Vehicle Emission Comparison",atop(italic("Baltimore vs Los Angeles, 1999-2008")))))+scale_shape_discrete(name  ="City",breaks=c("06037", "24510"),labels=c("Los Angeles", "Baltimore"))          
+dev.off()
+```
+**The emissions for motor vehicles in Los Angeles have increased between 1999 and 2008 and are highest than the values from Baltimore**
+
+
+
